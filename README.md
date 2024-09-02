@@ -10,6 +10,7 @@ The need for this script arose from managing different wallpaper formats tailore
 
 - **Automatic Detection of Connected Displays:** Utilizes macOS's `AppKit` framework to determine the number of connected displays.
 - **Dynamic Wallpaper Management:** Chooses a random wallpaper from a predefined folder based on the number of displays.
+- **Environment-Based Configuration:** Uses environment variables for configuring wallpaper paths, making the script flexible and easy to use.
 - **Simple and Secure Execution:** Validates inputs and securely executes AppleScript commands using Python's `subprocess` module.
 
 ## How It Works
@@ -26,7 +27,7 @@ The need for this script arose from managing different wallpaper formats tailore
 
 ## Current Known Issue
 
-While the script successfully changes the wallpaper for new desktops added after running the script, existing desktops (Spaces) may not always reflect the updated wallpaper. This appears to be due to a caching mechanism or specific behavior in macOS that prevents existing desktops from immediately reflecting new settings. We are currently investigating the cause and possible resolutions for this issue.
+While the script successfully changes the wallpaper for new desktops added after running the script, existing desktops (Spaces) may not always reflect the updated wallpaper. This appears to be due to a caching mechanism or specific behavior in macOS that prevents existing desktops from immediately reflecting new settings. I am currently investigating the cause and possible resolutions for this issue.
 
 ## Setup
 
@@ -37,13 +38,16 @@ While the script successfully changes the wallpaper for new desktops added after
      pip install pyobjc
      ```
 
-2. **Folder Structure:**
-   - Two folders containing wallpapers:
-     - `SINGLE_DISPLAY_FOLDER`: Folder with wallpapers formatted for single display setups.
-     - `MULTI_DISPLAY_FOLDER`: Folder with wallpapers formatted for multi-display setups.
+2. **Environment Variables:**
+   - Set up the following environment variables to specify the folders containing your wallpapers:
+     ```bash
+     export SINGLE_DISPLAY_FOLDER="/path/to/your/singleDisplay/wallpapers/"
+     export MULTI_DISPLAY_FOLDER="/path/to/your/multiDisplay/wallpapers/"
+     ```
+   - Make sure these directories exist and contain image files (`.jpg`, `.jpeg`, `.png`, or `.bmp`).
 
 3. **Configure the Script:**
-   - Update the paths for `SINGLE_DISPLAY_FOLDER` and `MULTI_DISPLAY_FOLDER` in the script to point to your desired directories.
+   - The script automatically reads the `SINGLE_DISPLAY_FOLDER` and `MULTI_DISPLAY_FOLDER` environment variables. Ensure these are set correctly before running the script.
 
 ## Usage
 
@@ -57,6 +61,9 @@ While the script successfully changes the wallpaper for new desktops added after
 2. **Output:**
    - The script will output the number of displays detected, the selected wallpaper folder, and the status of the wallpaper change process.
 
+## Future Enhancements
+
+- **Automatic Detection of Display Changes:** A future iteration of the script will include functionality to automatically detect changes in the number of connected displays. This will allow the script to run automatically and update wallpapers without manual intervention.
 
 ## Troubleshooting
 
@@ -65,7 +72,6 @@ While the script successfully changes the wallpaper for new desktops added after
 
 ## Conclusion
 
-This script provides a simple way to manage desktop wallpapers on macOS based on display configurations. Further investigation is needed to resolve the issue of existing desktops not always updating their wallpaper correctly.
-
+This script provides a simple way to manage desktop wallpapers on macOS based on display configurations using environment variables for flexibility. Further investigation is needed to resolve the issue of existing desktops not always updating their wallpaper correctly. Future enhancements will improve automation, providing an even more seamless experience.
 
 
